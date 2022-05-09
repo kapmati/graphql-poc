@@ -6,7 +6,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class BookService {
-    private BookRepository bookRepository;
+    private final BookRepository bookRepository;
+
+    public BookService(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
 
     public Book getBookById(String bookId) {
         return bookRepository.getById(bookId);

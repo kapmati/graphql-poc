@@ -6,7 +6,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthorService {
-    private AuthorRepository authorRepository;
+    private final AuthorRepository authorRepository;
+
+    public AuthorService(AuthorRepository authorRepository) {
+        this.authorRepository = authorRepository;
+    }
 
     public Author getAuthorById(String authorId) {
         return authorRepository.getById(authorId);

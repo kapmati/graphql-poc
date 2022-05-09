@@ -26,6 +26,6 @@ public class AuthorRepositoryInMemory implements AuthorRepository {
     }
 
     private Function<AuthorEntity, Author> mapEntityToDomainAuthor() {
-        return authorEntity -> new Author(authorEntity.id(), authorEntity.firstName(), authorEntity.secondName());
+        return authorEntity -> new Author(authorEntity.id(), authorEntity.firstName(), authorEntity.lastName());
     }
 }

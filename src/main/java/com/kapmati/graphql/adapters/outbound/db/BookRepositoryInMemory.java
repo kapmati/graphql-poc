@@ -1,7 +1,7 @@
 package com.kapmati.graphql.adapters.outbound.db;
 
-import com.kapmati.graphql.domain.Book;
-import com.kapmati.graphql.domain.BookRepository;
+import com.kapmati.graphql.domain.book.Book;
+import com.kapmati.graphql.domain.book.BookRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Arrays;

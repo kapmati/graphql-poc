@@ -7,5 +7,10 @@
             firstName
             lastName
         }
+    },
+    authorById(id: "author-2"){
+        id
+        firstName,
+        lastName
     }
 }

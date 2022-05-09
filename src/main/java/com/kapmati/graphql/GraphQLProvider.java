@@ -2,6 +2,7 @@ package com.kapmati.graphql;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
+import com.kapmati.graphql.adapters.inbound.book.GraphQLDataFetchers;
 import graphql.GraphQL;
 import graphql.schema.GraphQLSchema;
 import graphql.schema.idl.RuntimeWiring;

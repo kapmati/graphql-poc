@@ -1,4 +1,4 @@
-package com.kapmati.graphql;
+package com.kapmati.graphql.adapters.inbound.book;
 
 import com.google.common.collect.ImmutableMap;
 import graphql.schema.DataFetcher;

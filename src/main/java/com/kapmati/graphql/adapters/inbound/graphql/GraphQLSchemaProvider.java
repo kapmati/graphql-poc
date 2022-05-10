@@ -26,7 +26,10 @@ public class GraphQLSchemaProvider {
 
     private RuntimeWiring buildWiring() {
         return RuntimeWiring.newRuntimeWiring()
+                .type(newTypeWiring("Mutation")
+                        .dataFetcher("addBook", graphQLDataFetchers.addBookDataFetcher()))
                 .type(newTypeWiring("Query")
+                        .dataFetcher("books", graphQLDataFetchers.getBooksDataFetcher())
                         .dataFetcher("bookById", graphQLDataFetchers.getBookByIdDataFetcher())
                         .dataFetcher("authorById", graphQLDataFetchers.getAuthorByIdDataFetcher()))
                 .type(newTypeWiring("Book")

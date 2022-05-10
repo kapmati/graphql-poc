@@ -4,6 +4,8 @@ import com.kapmati.graphql.domain.book.Book;
 import com.kapmati.graphql.domain.book.BookRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BookService {
     private final BookRepository bookRepository;
@@ -16,5 +18,11 @@ public class BookService {
         return bookRepository.getById(bookId);
     }
 
+    public Book save(Book book) {
+        return bookRepository.save(book);
+    }
 
+    public List<Book> getBooks() {
+        return bookRepository.getBooks();
+    }
 }

@@ -7,6 +7,9 @@ import com.kapmati.graphql.domain.book.Book;
 import graphql.schema.DataFetcher;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.UUID;
+
 @Component
 public class GraphQLDataFetchers {
     private final AuthorService authorService;
@@ -15,6 +18,10 @@ public class GraphQLDataFetchers {
     public GraphQLDataFetchers(AuthorService authorService, BookService bookService) {
         this.authorService = authorService;
         this.bookService = bookService;
+    }
+
+    public DataFetcher<List<Book>> getBooksDataFetcher() {
+        return dataFetchingEnvironment -> bookService.getBooks();
     }
 
     public DataFetcher<Book> getBookByIdDataFetcher() {
@@ -42,6 +49,16 @@ public class GraphQLDataFetchers {
         return dataFetchingEnvironment -> {
             Book book = dataFetchingEnvironment.getSource();
             return book.pageCount();
+        };
+    }
+
+    public DataFetcher<Book> addBookDataFetcher() {
+        return dataFetchingEnvironment -> {
+            String name = dataFetchingEnvironment.getArgument("name");
+            Integer pageCount = dataFetchingEnvironment.getArgument("pageCount");
+            String authorId = dataFetchingEnvironment.getArgument("authorId");
+            var book = new Book(UUID.randomUUID().toString(), name, pageCount, authorId);
+            return bookService.save(book);
         };
     }
 }

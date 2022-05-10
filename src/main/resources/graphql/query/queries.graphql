@@ -1,5 +1,5 @@
 {
-    bookById(id: "book-1"){
+    bookById(id: "book-2"){
         id
         name
         pageCount
@@ -12,5 +12,14 @@
         id
         firstName,
         lastName
+    },
+    books {
+        id
+        name
+        pageCount
+        author {
+            firstName
+            lastName
+        }
     }
 }

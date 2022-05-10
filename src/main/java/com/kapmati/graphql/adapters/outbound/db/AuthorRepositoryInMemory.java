@@ -13,7 +13,8 @@ public class AuthorRepositoryInMemory implements AuthorRepository {
     private static final List<AuthorEntity> AUTHORS = Arrays.asList(
             new AuthorEntity("author-1", "Joanne", "Rowling"),
             new AuthorEntity("author-2", "Herman", "Melville"),
-            new AuthorEntity("author-3", "Anne", "Rice")
+            new AuthorEntity("author-3", "Anne", "Rice"),
+            new AuthorEntity("author-4", "Bob", "Uncle")
     );
 
     @Override

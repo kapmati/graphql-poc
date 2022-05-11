@@ -6,14 +6,36 @@ import graphql.schema.DataFetcher;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Component
-public class BookDataFetchers {
+public class BookDataFetchers implements DataFetcherGroup<Book> {
     private final BookService bookService;
 
     public BookDataFetchers(BookService bookService) {
         this.bookService = bookService;
+    }
+
+    @Override
+    public Map<String, DataFetcher<?>> getQueries() {
+        return Map.of("books", getBooksDataFetcher(),
+                "bookById", getBookByIdDataFetcher());
+    }
+
+    @Override
+    public Map<String, DataFetcher<?>> getMutations() {
+        return Map.of("addBook", addBookDataFetcher());
+    }
+
+    @Override
+    public Map<String, DataFetcher<?>> getFieldQueries() {
+        return Map.of("pageCount", getPageCountDataFetcher());
+    }
+
+    @Override
+    public Class<Book> getType() {
+        return Book.class;
     }
 
     public DataFetcher<List<Book>> getBooksDataFetcher() {

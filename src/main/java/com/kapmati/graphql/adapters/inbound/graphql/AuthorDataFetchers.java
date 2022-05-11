@@ -6,14 +6,35 @@ import com.kapmati.graphql.domain.book.Book;
 import graphql.schema.DataFetcher;
 import org.springframework.stereotype.Component;
 
+import java.util.Map;
 import java.util.UUID;
 
 @Component
-public class AuthorDataFetchers {
+public class AuthorDataFetchers implements DataFetcherGroup<Author> {
     private final AuthorService authorService;
 
     public AuthorDataFetchers(AuthorService authorService) {
         this.authorService = authorService;
+    }
+
+    @Override
+    public Map<String, DataFetcher<?>> getQueries() {
+        return Map.of("authorById", getAuthorByIdDataFetcher());
+    }
+
+    @Override
+    public Map<String, DataFetcher<?>> getMutations() {
+        return Map.of("addAuthor", addAuthorDataFetcher());
+    }
+
+    @Override
+    public Map<String, DataFetcher<?>> getFieldQueries() {
+        return Map.of("author", getAuthorDataFetcher());
+    }
+
+    @Override
+    public Class<Author> getType() {
+        return Author.class;
     }
 
     public DataFetcher<Author> getAuthorByIdDataFetcher() {

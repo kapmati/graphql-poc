@@ -15,4 +15,8 @@ public class AuthorService {
     public Author getAuthorById(String authorId) {
         return authorRepository.getById(authorId);
     }
+
+    public Author save(Author author) {
+        return authorRepository.save(author);
+    }
 }

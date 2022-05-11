@@ -1,5 +1,10 @@
 mutation AddBook {
     addBook(name: "Clean code", pageCount: 257, authorId: "author-4") {
-        name
+        id, name
+    }
+}
+mutation AddAuthor {
+    addAuthor(firstName: "Bill", lastName: "Snow") {
+        id, firstName, lastName
     }
 }

@@ -61,4 +61,13 @@ public class GraphQLDataFetchers {
             return bookService.save(book);
         };
     }
+
+    public DataFetcher<Author> addAuthorDataFetcher() {
+        return dataFetchingEnvironment -> {
+            String firstName = dataFetchingEnvironment.getArgument("firstName");
+            String lastName = dataFetchingEnvironment.getArgument("lastName");
+            var author = new Author(UUID.randomUUID().toString(), firstName, lastName);
+            return authorService.save(author);
+        };
+    }
 }

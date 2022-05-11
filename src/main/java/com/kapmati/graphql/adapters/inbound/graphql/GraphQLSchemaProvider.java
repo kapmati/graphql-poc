@@ -11,10 +11,13 @@ import static graphql.schema.idl.TypeRuntimeWiring.newTypeWiring;
 
 @Component
 public class GraphQLSchemaProvider {
-    private final GraphQLDataFetchers graphQLDataFetchers;
+    private final AuthorDataFetchers authorDataFetchers;
+    private final BookDataFetchers bookDataFetchers;
 
-    public GraphQLSchemaProvider(GraphQLDataFetchers graphQLDataFetchers) {
-        this.graphQLDataFetchers = graphQLDataFetchers;
+    public GraphQLSchemaProvider(AuthorDataFetchers authorDataFetchers,
+                                 BookDataFetchers bookDataFetchers) {
+        this.authorDataFetchers = authorDataFetchers;
+        this.bookDataFetchers = bookDataFetchers;
     }
 
     public GraphQLSchema buildSchema(String sdl) {
@@ -27,15 +30,15 @@ public class GraphQLSchemaProvider {
     private RuntimeWiring buildWiring() {
         return RuntimeWiring.newRuntimeWiring()
                 .type(newTypeWiring("Mutation")
-                        .dataFetcher("addBook", graphQLDataFetchers.addBookDataFetcher())
-                        .dataFetcher("addAuthor", graphQLDataFetchers.addAuthorDataFetcher()))
+                        .dataFetcher("addBook", bookDataFetchers.addBookDataFetcher())
+                        .dataFetcher("addAuthor", authorDataFetchers.addAuthorDataFetcher()))
                 .type(newTypeWiring("Query")
-                        .dataFetcher("books", graphQLDataFetchers.getBooksDataFetcher())
-                        .dataFetcher("bookById", graphQLDataFetchers.getBookByIdDataFetcher())
-                        .dataFetcher("authorById", graphQLDataFetchers.getAuthorByIdDataFetcher()))
+                        .dataFetcher("books", bookDataFetchers.getBooksDataFetcher())
+                        .dataFetcher("bookById", bookDataFetchers.getBookByIdDataFetcher())
+                        .dataFetcher("authorById", authorDataFetchers.getAuthorByIdDataFetcher()))
                 .type(newTypeWiring("Book")
-                        .dataFetcher("author", graphQLDataFetchers.getAuthorDataFetcher())
-                        .dataFetcher("pageCount", graphQLDataFetchers.getPageCountDataFetcher()))
+                        .dataFetcher("author", authorDataFetchers.getAuthorDataFetcher())
+                        .dataFetcher("pageCount", bookDataFetchers.getPageCountDataFetcher()))
                 .build();
     }
 }
